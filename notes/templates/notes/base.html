@@ -1,0 +1,77 @@
+﻿{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>
+{% block title %}
+Ntando's Notes
+{% endblock %}
+</title>
+
+<link rel="stylesheet"
+href="{% static 'notes/css/styles.css' %}">
+
+</head>
+
+<body>
+
+<header class="site-header">
+
+<div class="container header-content">
+
+<a class="brand"
+href="{% url 'note_list' %}">
+
+📝 Ntando's Notes
+
+</a>
+
+<nav class="navigation">
+
+<a href="{% url 'note_list' %}">
+Home
+</a>
+
+<a class="button button-primary"
+href="{% url 'note_create' %}">
+New Note
+</a>
+
+</nav>
+
+</div>
+
+</header>
+
+<main class="container main-content">
+
+{% block content %}
+{% endblock %}
+
+</main>
+
+<footer class="site-footer">
+
+<div class="container">
+
+<p>
+
+Ntando's Notes © 2026
+
+</p>
+
+</div>
+
+</footer>
+
+</body>
+
+</html>

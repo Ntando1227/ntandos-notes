@@ -1,0 +1,71 @@
+﻿{% extends "notes/base.html" %}
+
+{% block title %}
+{{ note.title }}
+{% endblock %}
+
+{% block content %}
+
+<section class="detail-layout">
+
+<article class="note-card note-detail-card">
+
+<div class="note-pin"></div>
+
+<p class="eyebrow">
+Ntando's Notes
+</p>
+
+<h1>
+
+{{ note.title }}
+
+</h1>
+
+<div class="note-content">
+
+{{ note.content|linebreaks }}
+
+</div>
+
+<div class="note-timestamps">
+
+<p>
+Created:
+{{ note.created_at|date:"d M Y • H:i" }}
+</p>
+
+<p>
+Last Updated:
+{{ note.updated_at|date:"d M Y • H:i" }}
+</p>
+
+</div>
+
+</article>
+
+<aside class="detail-actions">
+
+<a
+class="button button-primary"
+href="{% url 'note_update' note.pk %}">
+Edit
+</a>
+
+<a
+class="button button-danger"
+href="{% url 'note_delete' note.pk %}">
+Delete
+</a>
+
+<a
+class="button button-secondary"
+href="{% url 'note_list' %}">
+Back
+</a>
+
+</aside>
+
+</section>
+
+{% endblock %}

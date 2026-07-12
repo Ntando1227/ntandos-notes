@@ -1,0 +1,77 @@
+{% extends "notes/base.html" %}
+
+{% block title %}
+    {{ page_title }}
+{% endblock title %}
+
+{% block content %}
+<section class="form-wrapper">
+    <div class="form-card">
+        <p class="eyebrow">Ntando's Notes</p>
+        <h1>{{ form_heading }}</h1>
+
+        <form method="post" novalidate>
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="form-errors">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            <div class="form-group">
+                <label for="{{ form.title.id_for_label }}">
+                    Title
+                </label>
+
+                {{ form.title }}
+
+                {% if form.title.errors %}
+                    <div class="field-errors">
+                        {{ form.title.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.content.id_for_label }}">
+                    Content
+                </label>
+
+                {{ form.content }}
+
+                {% if form.content.errors %}
+                    <div class="field-errors">
+                        {{ form.content.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-actions">
+                <button
+                    class="button button-primary"
+                    type="submit"
+                >
+                    {{ submit_label }}
+                </button>
+
+                {% if note %}
+                    <a
+                        class="button button-secondary"
+                        href="{% url 'note_detail' note.pk %}"
+                    >
+                        Cancel
+                    </a>
+                {% else %}
+                    <a
+                        class="button button-secondary"
+                        href="{% url 'note_list' %}"
+                    >
+                        Cancel
+                    </a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock content %}

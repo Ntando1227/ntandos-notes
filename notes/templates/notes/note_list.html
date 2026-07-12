@@ -1,0 +1,110 @@
+﻿{% extends "notes/base.html" %}
+
+{% block title %}
+Ntando's Notes
+{% endblock title %}
+
+{% block content %}
+
+<section class="page-heading">
+
+    <div>
+
+        <p class="eyebrow">
+            Personal Notes Application
+        </p>
+
+        <h1>
+            Welcome to Ntando's Notes
+        </h1>
+
+        <p class="page-description">
+            Capture ideas, reminders, meeting notes, important tasks, and inspiration in one beautifully organised place.
+        </p>
+
+    </div>
+
+    <a
+        class="button button-primary"
+        href="{% url 'note_create' %}">
+        + Create Note
+    </a>
+
+</section>
+
+{% if notes %}
+
+<section class="notes-grid">
+
+    {% for note in notes %}
+
+    <article class="note-card">
+
+        <div class="note-pin"></div>
+
+        <h2>
+            <a href="{% url 'note_detail' note.pk %}">
+                {{ note.title }}
+            </a>
+        </h2>
+
+        <p class="note-preview">
+            {{ note.content|truncatewords:25 }}
+        </p>
+
+        <div class="note-meta">
+            Last updated:
+            {{ note.updated_at|date:"d M Y • H:i" }}
+        </div>
+
+        <div class="note-actions">
+
+            <a href="{% url 'note_detail' note.pk %}">
+                View
+            </a>
+
+            <a href="{% url 'note_update' note.pk %}">
+                Edit
+            </a>
+
+            <a
+                class="delete-link"
+                href="{% url 'note_delete' note.pk %}">
+                Delete
+            </a>
+
+        </div>
+
+    </article>
+
+    {% endfor %}
+
+</section>
+
+{% else %}
+
+<section class="empty-state">
+
+    <div class="empty-icon">
+        📝
+    </div>
+
+    <h2>
+        No notes yet
+    </h2>
+
+    <p>
+        Start capturing your ideas by creating your first note.
+    </p>
+
+    <a
+        class="button button-primary"
+        href="{% url 'note_create' %}">
+        Create Your First Note
+    </a>
+
+</section>
+
+{% endif %}
+
+{% endblock %}

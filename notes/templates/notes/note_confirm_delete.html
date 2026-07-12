@@ -1,0 +1,44 @@
+{% extends "notes/base.html" %}
+
+{% block title %}
+    {{ page_title }}
+{% endblock title %}
+
+{% block content %}
+<section class="form-wrapper">
+    <div class="form-card delete-card">
+        <p class="eyebrow danger-text">Delete Note</p>
+
+        <h1>Are you sure?</h1>
+
+        <p>
+            You are about to permanently delete:
+        </p>
+
+        <div class="delete-note-preview">
+            <strong>{{ note.title }}</strong>
+            <p>{{ note.content|truncatewords:20 }}</p>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="form-actions">
+                <button
+                    class="button button-danger"
+                    type="submit"
+                >
+                    Yes, Delete Note
+                </button>
+
+                <a
+                    class="button button-secondary"
+                    href="{% url 'note_detail' note.pk %}"
+                >
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock content %}
